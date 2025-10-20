@@ -146,19 +146,3 @@ Edit `src/utils/animations.js` to customize animation variants used throughout t
 - Lazy loading images
 - Efficient re-renders
 
-## 📄 License
-
-This project is open source and available under the MIT License.
-
-## 🤝 Contributing
-
-Feel free to fork this project and customize it for your own portfolio!
-
-## 📧 Contact
-
-For questions or feedback, reach out through the contact form on the website.
-
----
-
-**Built with ❤️ and React**
-
