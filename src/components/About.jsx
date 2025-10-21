@@ -4,6 +4,25 @@ import { personalInfo } from '../utils/data';
 import { useInView } from '../hooks/useInView';
 import { fadeInUp } from '../utils/animations';
 
+const downloadResume = async () => {
+  try {
+    const response = await fetch('/resume.pdf');
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Akash Chintaluri Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error downloading resume:', error);
+    // Fallback to direct link
+    window.open('/resume.pdf', '_blank');
+  }
+};
+
 const About = () => {
   const { ref, hasBeenInView } = useInView({ threshold: 0.2 });
 
@@ -96,15 +115,14 @@ const About = () => {
               >
                 Let's Work Together
               </motion.a>
-              <motion.a
-                href="/resume.pdf"
-                download="Akash_Chintaluri_Resume.pdf"
+              <motion.button
+                onClick={downloadResume}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-slate-800 border-2 border-primary-500 text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white transition-all duration-300 text-center"
               >
                 Download Resume
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         </div>
