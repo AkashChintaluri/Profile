@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, X, Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -197,6 +197,9 @@ const ProjectCard = ({ project }) => {
 const Projects = () => {
   const { ref, hasBeenInView } = useInView({ threshold: 0.1 });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -208,6 +211,30 @@ const Projects = () => {
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
+  };
+
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrev();
+    }
   };
 
   // Get position relative to center
@@ -283,25 +310,36 @@ const Projects = () => {
 
         {/* 3D Carousel */}
         <div className="relative">
-          {/* Navigation buttons */}
+          {/* Navigation buttons - minimalistic on mobile */}
           <button
             onClick={goToPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-4 bg-slate-800/90 backdrop-blur rounded-full text-white hover:bg-primary-500 transition-all hover:scale-110 shadow-xl"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-2 md:p-4 bg-transparent md:bg-slate-800/90 backdrop-blur text-white hover:bg-primary-500 transition-all hover:scale-110 shadow-xl"
             aria-label="Previous project"
           >
-            <ChevronLeft size={28} />
+            <div className="text-4xl md:text-2xl font-bold text-primary-400 md:text-white">
+              ⟨
+            </div>
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-4 bg-slate-800/90 backdrop-blur rounded-full text-white hover:bg-primary-500 transition-all hover:scale-110 shadow-xl"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-2 md:p-4 bg-transparent md:bg-slate-800/90 backdrop-blur text-white hover:bg-primary-500 transition-all hover:scale-110 shadow-xl"
             aria-label="Next project"
           >
-            <ChevronRight size={28} />
+            <div className="text-4xl md:text-2xl font-bold text-primary-400 md:text-white">
+              ⟩
+            </div>
           </button>
 
-          {/* Carousel container with 3D perspective */}
-          <div className="relative h-[600px] md:h-[650px]" style={{ perspective: '2000px' }}>
+          {/* Carousel container with 3D perspective and touch support */}
+          <div 
+            ref={carouselRef}
+            className="relative h-[600px] md:h-[650px] touch-pan-y" 
+            style={{ perspective: '2000px' }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="relative w-full h-full flex items-center justify-center">
               {projects.map((project, index) => {
                 const position = getPosition(index);
