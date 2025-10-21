@@ -64,7 +64,7 @@ const Education = () => {
                   <h4 className="text-primary-400 font-semibold text-sm">{edu.degree}</h4>
                   <p className="text-gray-400 text-sm">{edu.duration}</p>
                   {edu.gpa && (
-                    <p className="text-gray-300 text-sm font-medium">GPA: {edu.gpa}</p>
+                    <p className="text-gray-300 text-sm font-medium">{edu.gradeType}: {edu.gpa}</p>
                   )}
                 </div>
               </motion.div>

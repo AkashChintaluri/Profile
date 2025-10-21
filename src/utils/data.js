@@ -22,42 +22,29 @@ export const stats = [
 
 export const skills = [
   {
-    category: "AI & ML",
-    items: [
-      { name: "LangChain", level: 95, icon: "🔗" },
-      { name: "RAG Systems", level: 93, icon: "📚" },
-      { name: "GPT/LLMs", level: 92, icon: "🤖" },
-      { name: "TensorFlow", level: 85, icon: "🧠" },
-      { name: "PyTorch", level: 85, icon: "🔥" },
-      { name: "OpenCV", level: 80, icon: "👁️" },
-      { name: "MLOps", level: 88, icon: "⚙️" },
-      { name: "Prompt Engineering", level: 90, icon: "✍️" }
+    category: "AI & Machine Learning",
+    description: "Advanced expertise in modern AI technologies and ML frameworks",
+    technologies: [
+      "LangChain & RAG Systems", "GPT/LLMs (OpenAI, LLaMA, DeepSeek, Mistral)", 
+      "TensorFlow & PyTorch", "OpenCV & Computer Vision", "MLOps & Model Deployment",
+      "Prompt Engineering", "Agentic AI", "Sentence Transformers", "CNNs"
     ]
   },
   {
-    category: "Backend & Cloud",
-    items: [
-      { name: "Python", level: 95, icon: "🐍" },
-      { name: "Node.js", level: 90, icon: "🟢" },
-      { name: "FastAPI", level: 92, icon: "⚡" },
-      { name: "PostgreSQL", level: 88, icon: "🐘" },
-      { name: "AWS", level: 85, icon: "☁️" },
-      { name: "Docker", level: 87, icon: "🐋" },
-      { name: "Azure", level: 82, icon: "☁️" },
-      { name: "Terraform", level: 80, icon: "🏗️" }
+    category: "Backend & Cloud Infrastructure", 
+    description: "Full-stack development with cloud-native architectures",
+    technologies: [
+      "Python & Node.js", "FastAPI & Express", "PostgreSQL & MySQL", 
+      "AWS (EC2, S3, RDS, Bedrock, App Runner, Amplify)", "Azure AI Foundry",
+      "Docker & Containerization", "Terraform & Infrastructure as Code", "REST APIs"
     ]
   },
   {
-    category: "Frontend & Tools",
-    items: [
-      { name: "React", level: 90, icon: "⚛️" },
-      { name: "JavaScript", level: 88, icon: "💛" },
-      { name: "C++", level: 85, icon: "➕" },
-      { name: "SQL", level: 87, icon: "🗄️" },
-      { name: "Git", level: 92, icon: "📦" },
-      { name: "REST APIs", level: 90, icon: "🔌" },
-      { name: "FAISS/Pinecone", level: 85, icon: "🔍" },
-      { name: "CI/CD", level: 83, icon: "🔄" }
+    category: "Frontend & Development Tools",
+    description: "Modern web development and DevOps practices", 
+    technologies: [
+      "React & JavaScript", "HTML/CSS", "C++ & Java", "Git & GitHub Actions",
+      "FAISS/Pinecone/pgvector", "Nginx & PM2", "CI/CD Pipelines", "Agile & DevOps"
     ]
   }
 ];
@@ -175,6 +162,7 @@ export const education = [
     degree: "10th Grade",
     duration: "2019 - 2020",
     gpa: "92%",
+    gradeType: "Percentage",
     description: "Nashik, Maharashtra"
   },
   {
@@ -183,6 +171,7 @@ export const education = [
     degree: "12th Grade",
     duration: "2020 - 2022",
     gpa: "75%",
+    gradeType: "Percentage",
     description: "Nashik, Maharashtra"
   },
   {
@@ -191,6 +180,7 @@ export const education = [
     degree: "B.Tech - CSE",
     duration: "2022 - Present",
     gpa: "8.65/10",
+    gradeType: "GPA",
     description: "Kattankulathur, Chennai"
   }
 ];

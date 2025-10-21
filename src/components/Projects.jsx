@@ -113,9 +113,12 @@ const ProjectCard = ({ project }) => {
 
   return (
     <>
-      <div
+      <motion.div
         className="group relative bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 hover:border-primary-500 transition-all duration-300 cursor-pointer h-full"
         onClick={() => setIsModalOpen(true)}
+        whileHover={{ y: -4 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2 }}
       >
         {/* Image */}
         <div className="relative overflow-hidden aspect-video">
@@ -134,19 +137,24 @@ const ProjectCard = ({ project }) => {
             </div>
           )}
 
-          {/* Hover overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={(e) => e.stopPropagation()}
-              className="p-3 bg-primary-500 rounded-full text-white hover:bg-primary-600 transition-colors"
-            >
-              <Github size={20} />
-            </motion.a>
+          {/* GitHub icon and details text - always visible on mobile, hover on desktop */}
+          <div className="absolute bottom-4 left-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center gap-3">
+              <motion.a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => e.stopPropagation()}
+                className="p-2 bg-primary-500 rounded-full text-white hover:bg-primary-600 transition-colors"
+              >
+                <Github size={16} />
+              </motion.a>
+              <div className="px-3 py-1 bg-slate-800/90 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                Click for details
+              </div>
+            </div>
           </div>
         </div>
 
@@ -174,7 +182,7 @@ const ProjectCard = ({ project }) => {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Modal */}
       <AnimatePresence>
@@ -315,8 +323,8 @@ const Projects = () => {
                     onClick={() => isClickable && goToSlide(index)}
                   >
                     <div 
-                      className={`${isClickable ? 'cursor-pointer' : ''} ${position === 'center' ? 'pointer-events-auto' : 'pointer-events-none'}`}
-                      style={{ pointerEvents: position === 'center' ? 'auto' : 'none' }}
+                      className={`${isClickable ? 'cursor-pointer hover:scale-105 transition-transform duration-200' : ''}`}
+                      style={{ pointerEvents: position === 'center' ? 'auto' : 'auto' }}
                     >
                       <ProjectCard project={project} />
                     </div>
